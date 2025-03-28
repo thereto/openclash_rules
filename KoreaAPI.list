@@ -2,4 +2,7 @@
 # 部分域名会限制ip访问，这里指定域名，然后选择直连或者其他代理
 # 域名匹配
 DOMAIN,api.pandalive.co.kr
+DOMAIN,api.pandalive.co.kr:443
+DOMAIN-KEYWORD,pandalive
 DOMAIN-SUFFIX,pandalive.co.kr
+DOMAIN-SUFFIX,pandalive.co.kr:443
