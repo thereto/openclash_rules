@@ -1,7 +1,7 @@
 # 内容：Flextv & Pandatv
 # 域名关键字匹配
 DOMAIN-KEYWORD,flextv
-
+DOMAIN,global.poe.live-video
 # 域名后缀匹配
 DOMAIN-SUFFIX,live-video.net
 DOMAIN-SUFFIX,ivs.flextv.co.kr
