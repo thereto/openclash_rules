@@ -1,9 +1,10 @@
 # 内容：Flextv & Pandatv
 # 域名关键字匹配
 DOMAIN-KEYWORD,flextv
-DOMAIN-KEYWORD,live-video
 
 # 域名后缀匹配
 DOMAIN-SUFFIX,live-video.net
-DOMAIN-SUFFIX,live-video.net:443
-DOMAIN-SUFFIX,flextv.co.kr
+DOMAIN-SUFFIX,ivs.flextv.co.kr
+DOMAIN-SUFFIX,w2.pandalive.co.kr
+DOMAIN-SUFFIX,playlist.live-video.net
+DOMAIN-SUFFIX,j.cloudfront.hls.live-video.net
