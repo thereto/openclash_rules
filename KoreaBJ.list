@@ -1,0 +1,9 @@
+# 内容：Flextv & Pandatv
+# 域名关键字匹配
+DOMAIN-KEYWORD,flextv
+DOMAIN-KEYWORD,pandalive
+
+# 域名后缀匹配
+DOMAIN-SUFFIX,live-video.net
+DOMAIN-SUFFIX,flextv.co.kr
+DOMAIN-SUFFIX,pandalive.co.kr
