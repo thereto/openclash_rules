@@ -1,0 +1,181 @@
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}}
+
+# 机场订阅
+proxy-providers:
+  飞鸟:
+    <<: *p
+    url: "飞鸟订阅地址"
+    override:
+      udp: true
+      skip-cert-verify: true
+  快猫:
+    <<: *p
+    url: "快猫订阅地址"
+    override:
+      udp: true
+      skip-cert-verify: true
+proxies:
+  - name: "直连"
+    type: direct
+    udp: true
+
+# 全局配置
+port: 1088
+socks-port: 1099
+redir-port: 7892
+mixed-port: 7127
+tproxy-port: 7895
+allow-lan: true
+mode: rule
+log-level: silent
+bind-address: "*"
+ipv6: false
+unified-delay: true
+tcp-concurrent: true
+interface-name: br-lan
+keep-alive-idle: 600
+keep-alive-interval: 15
+profile:
+  store-selected: true
+  store-fake-ip: true
+global-ua: clash.meta
+
+# 控制面板
+external-controller: 0.0.0.0:9090
+secret: "123456"
+external-ui: "/usr/share/openclash/ui"
+# 嗅探
+sniffer:
+  enable: true
+  override-destination: true
+  sniff:
+    QUIC:
+      ports:
+      - 443
+    TLS:
+      ports:
+      - 443
+      - 8443
+    HTTP:
+      ports:
+      - 80
+      - 8080-8880
+      override-destination: true
+  force-domain:
+  - "+.netflix.com"
+  - "+.nflxvideo.net"
+  - "+.amazonaws.com"
+  - "+.media.dssott.com"
+  skip-domain:
+    - "+.apple.com"
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - "+.oray.com"
+    - "+.sunlogin.net"
+    - "+.push.apple.com"
+  parse-pure-ip: true
+# 入站
+tun:
+  enable: true
+  # system/gvisor/mixed
+  stack: mixed
+  dns-hijack: ["any:53", "tcp://any:53"]
+  auto-route: true
+  auto-redirect: true
+  auto-detect-interface: true
+# DNS模块
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  listen: 0.0.0.0:7874
+  nameserver:
+  - 202.103.44.150
+  - 202.103.24.68
+  fake-ip-filter-mode: blacklist
+  fake-ip-filter:
+    - "rule-set:private_domain,cn_domain"
+    - "+.services.googleapis.cn"
+    - "+.xn--ngstr-lra8j.com"
+    - "time.*.com"
+  default-nameserver:
+    - 223.5.5.5
+  proxy-server-nameserver:
+    - https://223.5.5.5/dns-query
+# 出站策略
+# 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
+pr: &pr {type: select, proxies: [🚀 节点选择, 🇸🇬 快猫·新加坡·负载均衡, 🇭🇰 快猫·香港·负载均衡, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国, 🎯 全球直连]}
+proxy-groups:
+  - {name: 🚀 节点选择, type: select, proxies: [🎯 全球直连, 🌐 手动选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
+  - {name: 🔞 KoreaBJ, <<: *pr}
+  - {name: 📹 YouTube, <<: *pr}
+  - {name: 🌎 Google, <<: *pr}
+  - {name: 💻 GitHub, <<: *pr}
+  - {name: 🧿 AI服务, <<: *pr}
+  - {name: 🎶 TikTok, <<: *pr}
+  - {name: 📲 Telegram, <<: *pr}
+  - {name: ✈ 测速工具, <<: *pr}
+  - {name: 🎯 全球直连, type: select, proxies: [直连]}
+  - {name: 🐋 漏网之鱼, <<: *pr}
+  - {name: 🌐 手动选择, type: select, include-all: true}
+  - {name: 🇸🇬 快猫·新加坡, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
+  - {name: 🇭🇰 快猫·香港, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
+  - {name: 🇼🇸 快猫·台湾, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
+  - {name: 🇰🇷 快猫·韩国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
+  - {name: 🇯🇵 快猫·日本, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
+  - {name: 🇬🇧 快猫·英国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(英国|Great Britain|UK)"}
+  - {name: 🇺🇸 快猫·美国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
+  - {name: 🇸🇬 飞鸟·新加坡, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
+  - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
+  - {name: 🇼🇸 飞鸟·台湾, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
+  - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
+  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
+  - {name: 🇸🇬 快猫·新加坡·负载均衡, type: load-balance, use: [快猫],strategy: round-robin, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
+  - {name: 🇭🇰 快猫·香港·负载均衡, type: load-balance, use: [快猫],strategy: round-robin, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
+  
+
+# 规则匹配
+# 此规则部分没有做防泄露处理，因为弊严重大于利！
+rules:
+  - DOMAIN,api.pandalive.co.kr,直连
+  - RULE-SET,korea_bj,🔞 KoreaBJ
+  - RULE-SET,private_domain,🎯 全球直连
+  - RULE-SET,proxylite,🚀 节点选择
+  - RULE-SET,ai,🧿 AI服务
+  - RULE-SET,github_domain,💻 GitHub
+  - RULE-SET,youtube_domain,📹 YouTube
+  - RULE-SET,google_domain,🌎 Google
+  - RULE-SET,tiktok_domain,🎶 TikTok
+  - RULE-SET,speedtest_domain,✈ 测速工具
+  - RULE-SET,telegram_domain,📲 Telegram
+  - RULE-SET,gfw_domain,🚀 节点选择
+  - RULE-SET,geolocation-!cn,🚀 节点选择
+  - RULE-SET,cn_domain,🎯 全球直连
+  - RULE-SET,google_ip,🌎 Google,no-resolve
+  - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,cn_ip,🎯 全球直连
+  - MATCH,🐋 漏网之鱼
+
+# 规则集
+rule-anchor:
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+  domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
+  class: &class {type: http, interval: 86400, behavior: classical, format: text}
+rule-providers:
+  private_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
+  korea_bj: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ.list"}
+  proxylite: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/ProxyLite.list"}
+  ai: {  <<: *domain, url: "https://gh-proxy.com/https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs" }
+  youtube_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
+  google_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
+  github_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
+  telegram_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
+  speedtest_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
+  tiktok_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
+  gfw_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
+  geolocation-!cn: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
+  cn_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs"}
+  cn_ip: { <<: *ip, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
+  google_ip: { <<: *ip, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
+  telegram_ip: { <<: *ip, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
