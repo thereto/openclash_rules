@@ -2,4 +2,3 @@
 # 部分域名会限制ip访问，这里指定域名，然后选择直连或者其他代理
 # 域名匹配
 DOMAIN,api.pandalive.co.kr
-DOMAIN,cdn.pandalive.co.kr
