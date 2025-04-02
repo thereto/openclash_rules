@@ -130,15 +130,13 @@ proxy-groups:
   - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
   - {name: 🇼🇸 飞鸟·台湾, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
   - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
-  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
-  - {name: 🇸🇬 快猫·新加坡·负载均衡, type: load-balance, use: [快猫],strategy: round-robin, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
-  - {name: 🇭🇰 快猫·香港·负载均衡, type: load-balance, use: [快猫],strategy: round-robin, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
-  
+  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}  
 
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN,api.pandalive.co.kr,直连
+  - DOMAIN,cnd.pandalive.co.kr,直连
   - RULE-SET,korea_bj,🔞 KoreaBJ
   - RULE-SET,private_domain,🎯 全球直连
   - RULE-SET,proxylite,🚀 节点选择
