@@ -136,7 +136,6 @@ proxy-groups:
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
 rules:
   - DOMAIN,api.pandalive.co.kr,直连
-  - DOMAIN,cnd.pandalive.co.kr,直连
   - RULE-SET,korea_bj,🔞 KoreaBJ
   - RULE-SET,private_domain,🎯 全球直连
   - RULE-SET,proxylite,🚀 节点选择
