@@ -101,7 +101,7 @@ dns:
     - "time.*.com"
   default-nameserver:
     - 223.5.5.5
-  proxy-server-nameserver: true
+  proxy-server-nameserver: []
   cache:
     size: 1000
     cache-timeout: 3600
