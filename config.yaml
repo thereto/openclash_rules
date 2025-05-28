@@ -4,13 +4,13 @@ p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://w
 proxy-providers:
   飞鸟:
     <<: *p
-    url: "飞鸟订阅地址"
+    url: "http://xxxxxxxxxxxxxxxxxxxx"
     override:
       udp: true
       skip-cert-verify: true
   快猫:
     <<: *p
-    url: "快猫订阅地址"
+    url: "https://xxxxxxxxxxxxxxx"
     override:
       udp: true
       skip-cert-verify: true
@@ -91,25 +91,48 @@ dns:
   fake-ip-range: 198.18.0.1/16
   listen: 0.0.0.0:7874
   nameserver:
-  - 202.103.44.150
-  - 202.103.24.68
-  fake-ip-filter-mode: blacklist
+    - 202.103.44.150
+    - 202.103.24.68
+    - https://doh.pub/dns-query
+  fallback:
+    - https://dns.cloudflare.com/dns-query
+    - https://doh.dns.sb/dns-query
+    - tls://8.8.4.4:853
+    - https://dns.twnic.tw/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4     # 保留地址过滤
+      - 0.0.0.0/8
+      - 127.0.0.0/8
+      - 10.0.0.0/8
+      - 192.168.0.0/16
+  nameserver-policy:
+    "geosite:cn":
+      - 202.103.44.150
+      - 202.103.24.68
   fake-ip-filter:
-    - "rule-set:private_domain,cn_domain"
-    - "+.services.googleapis.cn"
-    - "+.xn--ngstr-lra8j.com"
-    - "time.*.com"
+    - '*.lan'
+    - 'localhost.ptlogin2.qq.com'
+    - 'dns.msftncsi.com'
+    - 'ntp.*.*'
+    - 'time.*.*'
+    - 'connect.rom.miui.com'
   default-nameserver:
     - 223.5.5.5
-  proxy-server-nameserver: []
+    - 119.29.29.29
+  proxy-server-nameserver:
+    - https://dns.cloudflare.com/dns-query
+    - tls://8.8.8.8:853
   cache:
     size: 800
-    cache-timeout: 900
+    cache-timeout: 300
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国, 🎯 全球直连]}
+pr: &pr {type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
 proxy-groups:
-  - {name: 🚀 节点选择, type: select, proxies: [ 🌐 手动选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
+  - {name: 🚀 节点选择, type: select, proxies: [🌐 手动选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
   - {name: 🔞 KoreaBJ, <<: *pr}
   - {name: 📹 YouTube, <<: *pr}
   - {name: 🌎 Google, <<: *pr}
@@ -132,7 +155,7 @@ proxy-groups:
   - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
   - {name: 🇼🇸 飞鸟·台湾, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
   - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
-  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}  
+  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
 
 # 规则匹配
 # 此规则部分没有做防泄露处理，因为弊严重大于利！
