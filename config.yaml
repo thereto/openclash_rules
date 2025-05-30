@@ -1,19 +1,20 @@
-p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://www.gstatic.com/generate_204", interval: 300}}
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: "http://www.gstatic.com/generate_204", interval: 300}}
 
 # 机场订阅
 proxy-providers:
   飞鸟:
     <<: *p
-    url: "http://xxxxxxxxxxxxxxxxxxxx"
+    url: "http://xxxxxxxxxxxx"
     override:
       udp: true
       skip-cert-verify: true
   快猫:
     <<: *p
-    url: "https://xxxxxxxxxxxxxxx"
+    url: "https://yyyyyyyyyyyyyyyyyy"
     override:
       udp: true
       skip-cert-verify: true
+
 proxies:
   - name: "直连"
     type: direct
@@ -83,35 +84,55 @@ tun:
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
-# DNS模块
 dns:
   enable: true
   ipv6: false
+  listen: 0.0.0.0:7874
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
-  listen: 0.0.0.0:7874
+
+  # 默认优先使用的本地 DNS（用于快猫等本地服务）
   nameserver:
     - 202.103.44.150
     - 202.103.24.68
-    - https://doh.pub/dns-query
+
+  # fallback，用于国外域名或 fallback-filter 未命中
   fallback:
-    - https://dns.cloudflare.com/dns-query
-    - https://doh.dns.sb/dns-query
-    - tls://8.8.4.4:853
-    - https://dns.twnic.tw/dns-query
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
   fallback-filter:
     geoip: true
     geoip-code: CN
     ipcidr:
-      - 240.0.0.0/4     # 保留地址过滤
+      - 240.0.0.0/4
       - 0.0.0.0/8
       - 127.0.0.0/8
       - 10.0.0.0/8
       - 192.168.0.0/16
+
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://dns.cloudflare.com/dns-query
+
+  # 对快猫机场的域名明确绑定只走本地 DNS，不启用 fallback
   nameserver-policy:
+    "x.quickcht3.club":
+      - 202.103.44.150
+      - 202.103.24.68
+    "quickcht3.club":
+      - 202.103.44.150
+      - 202.103.24.68
+    "kuaimao2.club":
+      - 202.103.44.150
+      - 202.103.24.68
     "geosite:cn":
       - 202.103.44.150
       - 202.103.24.68
+
   fake-ip-filter:
     - '*.lan'
     - 'localhost.ptlogin2.qq.com'
@@ -119,15 +140,12 @@ dns:
     - 'ntp.*.*'
     - 'time.*.*'
     - 'connect.rom.miui.com'
-  default-nameserver:
-    - 223.5.5.5
-    - 119.29.29.29
-  proxy-server-nameserver:
-    - https://dns.cloudflare.com/dns-query
-    - tls://8.8.8.8:853
+
   cache:
     size: 800
     cache-timeout: 300
+
+
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
