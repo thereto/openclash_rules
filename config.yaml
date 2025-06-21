@@ -4,16 +4,14 @@ p: &p {type: http, interval: 86400, health-check: {enable: true, url: "http://ww
 proxy-providers:
   飞鸟:
     <<: *p
-    url: "http://xxxxxxxxxxxx"
+    url: "xxxxx"
     override:
       udp: true
-      skip-cert-verify: true
   快猫:
     <<: *p
-    url: "https://yyyyyyyyyyyyyyyyyy"
+    url: "xxxx"
     override:
       udp: true
-      skip-cert-verify: true
 
 proxies:
   - name: "直连"
@@ -21,8 +19,8 @@ proxies:
     udp: true
 
 # 全局配置
-port: 1088
-socks-port: 1099
+port: 7890
+socks-port: 7891
 redir-port: 7892
 mixed-port: 7127
 tproxy-port: 7895
@@ -118,7 +116,7 @@ dns:
     - https://dns.alidns.com/dns-query
     - https://dns.cloudflare.com/dns-query
 
-  # 对快猫机场的域名明确绑定只走本地 DNS，不启用 fallback
+  # 对机场的域名明确绑定只走本地 DNS，不启用 fallback
   nameserver-policy:
     "x.quickcht3.club":
       - 202.103.44.150
@@ -132,6 +130,11 @@ dns:
     "geosite:cn":
       - 202.103.44.150
       - 202.103.24.68
+    "13.248.254.117":
+      - 114.114.114.114
+      - 223.5.5.5
+      - 119.29.29.29
+      - 8.8.8.8
 
   fake-ip-filter:
     - '*.lan'
