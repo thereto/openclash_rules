@@ -88,6 +88,7 @@ dns:
   listen: 0.0.0.0:7874
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
+  use-hosts: true
 
   # 默认优先使用的本地 DNS（用于快猫等本地服务）
   nameserver:
@@ -96,8 +97,10 @@ dns:
 
   # fallback，用于国外域名或 fallback-filter 未命中
   fallback:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+    - 8.8.8.8
+    - 1.1.1.1
+    - 119.28.28.28
+    - 223.6.6.6
   fallback-filter:
     geoip: true
     geoip-code: CN
@@ -113,42 +116,32 @@ dns:
     - 119.29.29.29
 
   proxy-server-nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://dns.cloudflare.com/dns-query
+    - 8.8.8.8
+    - 1.1.1.1
 
   # 对机场的域名明确绑定只走本地 DNS，不启用 fallback
   nameserver-policy:
-    "x.quickcht3.club":
-      - 202.103.44.150
-      - 202.103.24.68
     "quickcht3.club":
       - 202.103.44.150
       - 202.103.24.68
     "kuaimao2.club":
       - 202.103.44.150
       - 202.103.24.68
-    "geosite:cn":
-      - 202.103.44.150
-      - 202.103.24.68
-    "13.248.254.117":
-      - 114.114.114.114
-      - 223.5.5.5
-      - 119.29.29.29
-      - 8.8.8.8
 
   fake-ip-filter:
     - '*.lan'
-    - 'localhost.ptlogin2.qq.com'
-    - 'dns.msftncsi.com'
-    - 'ntp.*.*'
-    - 'time.*.*'
-    - 'connect.rom.miui.com'
+    - '*.localdomain'
+    - '*.example'
+    - '*.invalid'
+    - '*.localhost'
+    - '*.test'
+    - '*.local'
+    - '*.home.arpa'
 
   cache:
-    size: 800
-    cache-timeout: 300
-
-
+    size: 512
+    cache-timeout: 120
+  
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
