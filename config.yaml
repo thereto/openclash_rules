@@ -90,7 +90,7 @@ dns:
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
 
-  # 默认优先使用的本地 DNS（用于快猫等本地服务）
+  # 默认优先使用的本地 DNS（用于快猫等本地服务）如果使用adguardhome namesserver需要设置成：127.0.0.1：端口号
   nameserver:
     - 202.103.44.150
     - 202.103.24.68
