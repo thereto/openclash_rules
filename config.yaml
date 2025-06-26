@@ -128,8 +128,8 @@ dns:
     - '*.home.arpa'
 
   cache:
-    size: 512
-    cache-timeout: 120
+    size: 4096
+    cache-timeout: 0
 
 
 # 出站策略
