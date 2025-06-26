@@ -4,12 +4,12 @@ p: &p {type: http, interval: 86400, health-check: {enable: true, url: "http://ww
 proxy-providers:
   飞鸟:
     <<: *p
-    url: "xxxxx"
+    url: "http://xxxxxxxxxxxxxx"
     override:
       udp: true
   快猫:
     <<: *p
-    url: "xxxx"
+    url: "https://xxxxxxxxxxxxxx"
     override:
       udp: true
 
@@ -23,7 +23,7 @@ port: 7890
 socks-port: 7891
 redir-port: 7892
 mixed-port: 7127
-tproxy-port: 7895
+tproxy-port: 7894
 allow-lan: true
 mode: rule
 log-level: silent
@@ -37,7 +37,6 @@ keep-alive-interval: 15
 profile:
   store-selected: true
   store-fake-ip: true
-global-ua: clash.meta
 
 # 控制面板
 external-controller: 0.0.0.0:9090
@@ -46,20 +45,14 @@ external-ui: "/usr/share/openclash/ui"
 # 嗅探
 sniffer:
   enable: true
-  override-destination: true
   sniff:
-    QUIC:
-      ports:
-      - 443
-    TLS:
-      ports:
-      - 443
-      - 8443
     HTTP:
-      ports:
-      - 80
-      - 8080-8880
+      ports: [80, 8080-8880]
       override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
   force-domain:
   - "+.netflix.com"
   - "+.nflxvideo.net"
@@ -90,7 +83,7 @@ dns:
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
 
-  # 默认优先使用的本地 DNS（用于快猫等本地服务）如果使用adguardhome namesserver需要设置成：127.0.0.1：端口号
+  # 默认优先使用的本地 DNS（用于快猫等本地服务）
   nameserver:
     - 202.103.44.150
     - 202.103.24.68
@@ -112,7 +105,6 @@ dns:
       - 192.168.0.0/16
 
   default-nameserver:
-    - 223.5.5.5
     - 119.29.29.29
 
   proxy-server-nameserver:
@@ -122,9 +114,6 @@ dns:
   # 对机场的域名明确绑定只走本地 DNS，不启用 fallback
   nameserver-policy:
     "quickcht3.club":
-      - 202.103.44.150
-      - 202.103.24.68
-    "kuaimao2.club":
       - 202.103.44.150
       - 202.103.24.68
 
@@ -141,7 +130,8 @@ dns:
   cache:
     size: 512
     cache-timeout: 120
-  
+
+
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
 pr: &pr {type: select, proxies: [🎯 全球直连, 🚀 节点选择, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇼🇸 快猫·台湾, 🇰🇷 快猫·韩国, 🇯🇵 快猫·日本, 🇬🇧 快猫·英国, 🇺🇸 快猫·美国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇼🇸 飞鸟·台湾, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国]}
