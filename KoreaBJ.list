@@ -1,6 +1,6 @@
 # 内容：Flextv & Pandatv
 # 域名关键字匹配
-DOMAIN-KEYWORD,flextv
+# DOMAIN-KEYWORD,flextv
 # 域名后缀匹配
 DOMAIN-SUFFIX,us-west-2.playback.live-video.net
 DOMAIN-SUFFIX,live-video.net
