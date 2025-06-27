@@ -84,17 +84,17 @@ dns:
   use-hosts: true
 
   # 默认本地 DNS，仅用于国内域名（通过 fallback-filter 控制）
-  nameserver:
+    nameserver:
     - 202.103.44.150
     - 202.103.24.68
     - 114.114.114.114
 
   # fallback DNS，通过代理远程解析，仅用于国外域名
   fallback:
-    - 8.8.8.8
-    - 1.1.1.1
-    - 119.29.29.29
+    - 8.8.4.4
+    - 1.0.0.1
     - 223.6.6.6
+    - 119.29.29.29
   # fallback-filter 只允许非CN使用 fallback，也就是国外才走代理解析
   fallback-filter:
     geoip: true
