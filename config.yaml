@@ -170,18 +170,18 @@ rules:
   - RULE-SET,private_domain,🎯 全球直连
   - RULE-SET,proxylite,🚀 节点选择
   - RULE-SET,github_domain,💻 GitHub
-  - RULE-SET,youtube_domain,📹 YouTube
-  - RULE-SET,google_domain,🌎 Google
   - RULE-SET,tiktok_domain,🎶 TikTok
   - RULE-SET,speedtest_domain,✈ 测速工具
   - RULE-SET,ai,🧿 AI服务
+  - RULE-SET,youtube_domain,📹 YouTube
+  - RULE-SET,google_domain,🌎 Google
   - RULE-SET,telegram_domain,📲 Telegram
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
   - RULE-SET,google_ip,🌎 Google,no-resolve
   - RULE-SET,gfw_domain,🚀 节点选择
-  - RULE-SET,geolocation-!cn,🚀 节点选择
-  - RULE-SET,cn_domain,🎯 全球直连
   - RULE-SET,cn_ip,🎯 全球直连,no-resolve
+  - RULE-SET,cn_domain,🎯 全球直连
+  - RULE-SET,geolocation-!cn,🚀 节点选择
   - MATCH,🐋 漏网之鱼
 
 # 规则集
