@@ -4,12 +4,12 @@ p: &p {type: http, interval: 86400, health-check: {enable: true, url: "http://ww
 proxy-providers:
   飞鸟:
     <<: *p
-    url: "http://xxxxxxxxxxxxxx"
+    url: "http://xxxxxxxxxxxxxxxxxxxx"
     override:
       udp: true
   快猫:
     <<: *p
-    url: "https://xxxxxxxxxxxxxx"
+    url: "https://yyyyyyyyyyyyyyyyyyyy"
     override:
       udp: true
 
@@ -83,39 +83,40 @@ dns:
   fake-ip-range: 198.18.0.1/16
   use-hosts: true
 
-  # 默认优先使用的本地 DNS（用于快猫等本地服务）
+  # 默认本地 DNS，仅用于国内域名（通过 fallback-filter 控制）
   nameserver:
     - 202.103.44.150
     - 202.103.24.68
+    - 114.114.114.114
 
-  # fallback，用于国外域名或 fallback-filter 未命中
+  # fallback DNS，通过代理远程解析，仅用于国外域名
   fallback:
     - 8.8.8.8
     - 1.1.1.1
-    - 119.28.28.28
+    - 119.29.29.29
     - 223.6.6.6
+  # fallback-filter 只允许非CN使用 fallback，也就是国外才走代理解析
   fallback-filter:
     geoip: true
     geoip-code: CN
     ipcidr:
       - 240.0.0.0/4
-      - 0.0.0.0/8
+      - 0.0.0.0/32
       - 127.0.0.0/8
       - 10.0.0.0/8
       - 192.168.0.0/16
-
+  # 本地 DNS 查询失败时才使用 fallback，不主动触发
   default-nameserver:
+    - 223.5.5.5
     - 119.29.29.29
-
+  # fallback 的查询通过代理进行
   proxy-server-nameserver:
+    - https://dns.cloudflare.com/dns-query
     - 8.8.8.8
     - 1.1.1.1
+    - 114.114.114.114
 
   # 对机场的域名明确绑定只走本地 DNS，不启用 fallback
-  nameserver-policy:
-    "quickcht3.club":
-      - 202.103.44.150
-      - 202.103.24.68
 
   fake-ip-filter:
     - '*.lan'
@@ -168,19 +169,19 @@ rules:
   - RULE-SET,korea_bj,🔞 KoreaBJ
   - RULE-SET,private_domain,🎯 全球直连
   - RULE-SET,proxylite,🚀 节点选择
-  - RULE-SET,ai,🧿 AI服务
   - RULE-SET,github_domain,💻 GitHub
   - RULE-SET,youtube_domain,📹 YouTube
   - RULE-SET,google_domain,🌎 Google
   - RULE-SET,tiktok_domain,🎶 TikTok
   - RULE-SET,speedtest_domain,✈ 测速工具
+  - RULE-SET,ai,🧿 AI服务
   - RULE-SET,telegram_domain,📲 Telegram
+  - RULE-SET,telegram_ip,📲 Telegram,no-resolve
+  - RULE-SET,google_ip,🌎 Google,no-resolve
   - RULE-SET,gfw_domain,🚀 节点选择
   - RULE-SET,geolocation-!cn,🚀 节点选择
   - RULE-SET,cn_domain,🎯 全球直连
-  - RULE-SET,google_ip,🌎 Google,no-resolve
-  - RULE-SET,telegram_ip,📲 Telegram,no-resolve
-  - RULE-SET,cn_ip,🎯 全球直连
+  - RULE-SET,cn_ip,🎯 全球直连,no-resolve
   - MATCH,🐋 漏网之鱼
 
 # 规则集
