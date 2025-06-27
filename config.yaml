@@ -116,8 +116,6 @@ dns:
     - 1.1.1.1
     - 114.114.114.114
 
-  # 对机场的域名明确绑定只走本地 DNS，不启用 fallback
-
   fake-ip-filter:
     - '*.lan'
     - '*.localdomain'
@@ -153,13 +151,13 @@ proxy-groups:
   - {name: 🇭🇰 快猫·香港, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
   - {name: 🇼🇸 快猫·台湾, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
   - {name: 🇰🇷 快猫·韩国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇯🇵 快猫·日本, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
+  - {name: 🇯🇵 快猫·日本, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(日本|jp|japan)"}
   - {name: 🇬🇧 快猫·英国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(英国|Great Britain|UK)"}
   - {name: 🇺🇸 快猫·美国, type: url-test, use: [快猫], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
   - {name: 🇸🇬 飞鸟·新加坡, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
   - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
   - {name: 🇼🇸 飞鸟·台湾, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
-  - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|日|jp|japan)"}
+  - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|jp|japan)"}
   - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
 
 # 规则匹配
