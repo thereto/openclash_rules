@@ -157,7 +157,9 @@ proxy-groups:
   - {name: 🇸🇬 飞鸟·新加坡, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
   - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(港|hk|hongkong|hong kong)"}
   - {name: 🇼🇸 飞鸟·台湾, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(台|新北|彰化|TW|Taiwan)"}
+  - {name: 🇰🇷 飞鸟·韩国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
   - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(日本|jp|japan)"}
+  - {name: 🇻🇳 飞鸟·越南, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(越南|vn|Vietnam)"}
   - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 180, filter: "(?i)(美|us|unitedstates|united states)"}
 
 # 规则匹配
