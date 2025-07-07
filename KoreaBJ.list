@@ -4,7 +4,7 @@
 # 域名后缀匹配
 DOMAIN-SUFFIX,us-west-2.playback.live-video.net
 DOMAIN-SUFFIX,live-video.net
-DOMAIN-SUFFIX,ivs.flextv.co.kr
+DOMAIN-SUFFIX,flextv.co.kr
 DOMAIN-SUFFIX,pandalive.co.kr
 DOMAIN-SUFFIX,playlist.live-video.net
 DOMAIN-SUFFIX,j.cloudfront.hls.live-video.net
