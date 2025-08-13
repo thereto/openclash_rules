@@ -3,6 +3,8 @@
 # DOMAIN-KEYWORD,flextv
 # 域名后缀匹配
 DOMAIN-SUFFIX,us-west-2.playback.live-video.net
+DOMAIN-SUFFIX,ap-northeast-2.playback.live-video.net
+DOMAIN-SUFFIX,playback.live-video.net
 DOMAIN-SUFFIX,live-video.net
 DOMAIN-SUFFIX,flextv.co.kr
 DOMAIN-SUFFIX,ttinglive.com
@@ -14,4 +16,5 @@ DOMAIN-SUFFIX,popkontv.com
 DOMAIN-SUFFIX,popkontv.hscdn.com
 DOMAIN-SUFFIX,popcast.co.kr
 DOMAIN-SUFFIX,popkontv.kr
+
 
