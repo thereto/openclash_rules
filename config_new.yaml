@@ -1,4 +1,4 @@
-p: &p {type: http, interval: 86400, health-check: {enable: true, url: "http://www.gstatic.com/generate_204", interval: 300}}
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://dns.cloudflare.com/generate_204", interval: 300}}
 
 # 机场订阅
 proxy-providers:
@@ -8,11 +8,11 @@ proxy-providers:
 
   快猫:
     <<: *p
-    url: "xxxxxxx"
+    url: "https://8ff4670e83ef4cd"
 
   牛逼:
     <<: *p
-    url: "yyyyyyyyy"
+    url: "https://19db1b20d9c186c2d4258"
 
 proxies:
   - name: "直连"
@@ -111,6 +111,7 @@ dns:
     - 114.114.114.114
     - 119.29.29.29
     - https://dns.cloudflare.com/dns-query
+    - https://dns.google/dns-query
 
   fake-ip-filter:
     - '*.lan'
