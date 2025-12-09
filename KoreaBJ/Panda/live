@@ -1,4 +1,0 @@
-# 原始m3u8域名匹配 解析后可得到不同质量的m3u8直播流
-# 域名后缀匹配
-DOMAIN-SUFFIX,us-west-2.playback.live-video.net
-DOMAIN-SUFFIX,ap-northeast-2.playback.live-video.net
