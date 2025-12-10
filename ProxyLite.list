@@ -13,6 +13,7 @@ IP-CIDR,103.115.43.2/32,no-resolve
 DOMAIN,dns.cloudflare.com
 DOMAIN,dns.google
 DOMAIN,doh-pure.onedns.net
+DOMAIN,public.dns.iij.jp
 DOMAIN-SUFFIX,cloudflare.com
 DOMAIN-SUFFIX,1dot1dot1dot1.cloudflare-dns.com
 DOMAIN-SUFFIX,dot.sb
