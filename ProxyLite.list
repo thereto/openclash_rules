@@ -9,6 +9,10 @@
 IP-CIDR,142.171.133.131/32,no-resolve
 IP-CIDR,103.115.43.2/32,no-resolve
 
+# 快猫
+DOMAIN,ooc-qc-api.bgp365.xyz
+DOMAIN,www.km688.ink
+
 # 国外DNS
 DOMAIN,dns.cloudflare.com
 DOMAIN,dns.google
