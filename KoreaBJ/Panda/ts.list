@@ -1,3 +1,6 @@
 # 拉取ts片段
 # 域名后缀匹配
 DOMAIN-SUFFIX,j.cloudfront.hls.live-video.net
+DOMAIN-SUFFIX,cloudfront.net
+DOMAIN-SUFFIX,amazonaws.com
+DOMAIN-SUFFIX,awsstatic.com
