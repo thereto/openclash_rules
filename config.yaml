@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://c886071bc.jpg"
+    url: "https://c88xxx071bc.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,7 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuzhuzhu.whtc230fd4258"
+    url: "https://zhuxxx23x258"
 
   快猫:
     <<: *p
@@ -46,13 +46,11 @@ external-ui: "/usr/share/openclash/ui"
 # 嗅探
 sniffer:
   enable: true
+  override-destination: false
   sniff:
     HTTP:
       ports: [80, 8080-8880]
-      override-destination: true
     TLS:
-      ports: [443, 8443]
-    QUIC:
       ports: [443, 8443]
   force-domain:
   - "+.netflix.com"
@@ -60,13 +58,13 @@ sniffer:
   - "+.media.dssott.com"
   skip-domain:
     - "+.live-video.net"
-    - "*.cloudfront.net"
-    - "*.amazonaws.com"
-    - "*.awsstatic.com"
-    - "*.amazonvideo.com"
-    - Mijia Cloud
-    - "+.apple.com"
-    - dlg.io.mi.com
+    - "+.cloudfront.net"
+    - "+.amazonaws.com"
+    - "+.awsstatic.com"
+    - "+.akamaized.net"
+    - "+.fastly.net"
+    - "+.edgesuite.net"
+    - "+.edgekey.net"
     - "+.oray.com"
     - "+.sunlogin.net"
     - "+.push.apple.com"
@@ -102,7 +100,6 @@ dns:
   fallback:
     - https://dns.google/dns-query
     - https://dns.cloudflare.com/dns-query
-    - https://doh.opendns.com/dns-query
     
   # fallback-filter 只允许非CN使用 fallback，也就是国外才走代理解析
   fallback-filter:
@@ -127,14 +124,20 @@ dns:
     - 8.8.8.8
   
   fake-ip-filter:
-    - '*.lan'
-    - '*.localdomain'
-    - '*.local'
-    - '*.localhost'
-    - '*.example'
-    - '*.invalid'
-    - '*.test'
-    - '*.home.arpa'
+    # 基础
+    - "*.lan"
+    - "*.local"
+    - "*.localhost"
+
+    # 直播 CDN / HLS / TS 强制 real-ip
+    - "+.live-video.net"
+    - "+.cloudfront.net"
+    - "+.amazonaws.com"
+    - "+.awsstatic.com"
+    - "+.akamaized.net"
+    - "+.fastly.net"
+    - "+.edgesuite.net"
+    - "+.edgekey.net"
   cache:
     size: 4096
     cache-timeout: 120
