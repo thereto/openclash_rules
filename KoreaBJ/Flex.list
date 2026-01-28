@@ -3,7 +3,5 @@
 DOMAIN,medialive-pull.ttinglive.com
 # 域名后缀匹配
 DOMAIN-SUFFIX,ttinglive.com
-DOMAIN-SUFFIX,flextv.co.kr
 # 域名关键字匹配
 DOMAIN-KEYWORD,ttinglive
-DOMAIN-KEYWORD,flextv
