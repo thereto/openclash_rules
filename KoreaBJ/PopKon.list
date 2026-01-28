@@ -1,6 +1,8 @@
 # popkon 相关域名
 # 域名匹配
 DOMAIN,live-popkontv.hscdn.com
+DOMAIN,events.launchdarkly.com
+DOMAIN,bam.nr-data.net
 # 域名后缀匹配
 DOMAIN-SUFFIX,whatap-browser-agent.io
 DOMAIN-SUFFIX,popcast.co.kr
