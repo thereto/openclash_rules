@@ -4,3 +4,5 @@ DOMAIN-SUFFIX,j.cloudfront.hls.live-video.net
 DOMAIN-SUFFIX,cloudfront.net
 DOMAIN-SUFFIX,amazonaws.com
 DOMAIN-SUFFIX,awsstatic.com
+# 域名关键字匹配
+DOMAIN-KEYWORD,cloudfront
