@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://c88xxx071bc.jpg"
+    url: "https://c8856sgsg90340d6071bc.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,7 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuxxx23x258"
+    url: "https://zhuzhxc0fd4258"
 
   快猫:
     <<: *p
@@ -57,6 +57,7 @@ sniffer:
   - "+.nflxvideo.net"
   - "+.media.dssott.com"
   skip-domain:
+    - "+.j.cloudfront.hls.live-video.net"
     - "+.live-video.net"
     - "+.cloudfront.net"
     - "+.amazonaws.com"
@@ -112,7 +113,6 @@ dns:
       - 192.168.0.0/16
       - 240.0.0.0/4
     domain:
-      - +.live-video.net
       - +.google.com
       - +.facebook.com
       - +.youtube.com
@@ -130,8 +130,11 @@ dns:
     - "*.localhost"
 
     # 直播 CDN / HLS / TS 强制 real-ip
+    - "+.j.cloudfront.hls.live-video.net"
     - "+.live-video.net"
     - "+.cloudfront.net"
+    - "+.ttinglive.com"
+    - "live-popkontv.hscdn.com"
     - "+.amazonaws.com"
     - "+.awsstatic.com"
     - "+.akamaized.net"
@@ -141,7 +144,6 @@ dns:
   cache:
     size: 4096
     cache-timeout: 120
-
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
@@ -160,7 +162,8 @@ proxy-groups:
   - {name: 🔞 PandaLive, <<: *pr}
   - {name: 🔞 PandaMu, <<: *pr}
   - {name: 🔞 PandaTs, <<: *pr}
-  - {name: 💠 Flex, <<: *pr}
+  - {name: 💠 FlexAPI, <<: *pr}
+  - {name: 🔞 FlexLive, <<: *pr}
   - {name: 💠 Soop, <<: *pr}
   - {name: 💠 Popkon, <<: *pr}
   - {name: 📹 YouTube, <<: *pr}
@@ -221,7 +224,8 @@ rules:
   - RULE-SET,panda_live,🔞 PandaLive
   - RULE-SET,panda_m3u8,🔞 PandaMu
   - RULE-SET,panda_ts,🔞 PandaTs
-  - RULE-SET,flex,💠 Flex
+  - RULE-SET,flex_api,💠 FlexAPI
+  - RULE-SET,flex_live,🔞 FlexLive
   - RULE-SET,soop,💠 Soop
   - RULE-SET,popkon,💠 Popkon
   - RULE-SET,proxyair,🔰 节点选择
@@ -253,7 +257,8 @@ rule-providers:
   panda_live: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Panda/live.list"}
   panda_m3u8: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Panda/m3u8.list"}
   panda_ts: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Panda/ts.list"}
-  flex: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex.list"}
+  flex_api: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex/api.list"}
+  flex_live: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex/live.list"}
   soop: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Soop.list"}
   popkon: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/PopKon.list"}
   proxylite: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/ProxyLite.list"}
