@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://c8856sgsg90340d6071bc.jpg"
+    url: "https://c8bc.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,7 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuzhxc0fd4258"
+    url: "https://zhuzhfd4258"
 
   快猫:
     <<: *p
@@ -49,9 +49,9 @@ sniffer:
   override-destination: false
   sniff:
     HTTP:
-      ports: [80, 8080-8880]
+      ports: [80, 8080]
     TLS:
-      ports: [443, 8443]
+      ports: [443]
   force-domain:
   - "+.netflix.com"
   - "+.nflxvideo.net"
@@ -93,9 +93,9 @@ dns:
     - 119.29.29.29
   # 默认本地 DNS，仅用于国内域名（通过 fallback-filter 控制）
   nameserver:
-    - 202.103.44.150
-    - 202.103.24.68
-    
+    - 223.5.5.5
+    - 119.29.29.29
+
   proxy-server: 🌍 DNS解析
   # fallback DNS，通过代理远程解析，仅用于国外域名
   fallback:
@@ -143,7 +143,7 @@ dns:
     - "+.edgekey.net"
   cache:
     size: 4096
-    cache-timeout: 120
+    cache-timeout: 43200
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
