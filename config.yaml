@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://c8bc.jpg"
+    url: "https://c88cccd6071bc.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,7 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuzhfd4258"
+    url: "https://zhuzdsfd9c186c230fd4258"
 
   快猫:
     <<: *p
@@ -163,6 +163,7 @@ proxy-groups:
   - {name: 🔞 PandaMu, <<: *pr}
   - {name: 🔞 PandaTs, <<: *pr}
   - {name: 💠 FlexAPI, <<: *pr}
+  - {name: 💒 FlexCDN, <<: *pr}
   - {name: 🔞 FlexLive, <<: *pr}
   - {name: 💠 Soop, <<: *pr}
   - {name: 💠 Popkon, <<: *pr}
@@ -225,6 +226,7 @@ rules:
   - RULE-SET,panda_m3u8,🔞 PandaMu
   - RULE-SET,panda_ts,🔞 PandaTs
   - RULE-SET,flex_api,💠 FlexAPI
+  - RULE-SET,flex_cdn,💒 FlexCDN
   - RULE-SET,flex_live,🔞 FlexLive
   - RULE-SET,soop,💠 Soop
   - RULE-SET,popkon,💠 Popkon
@@ -258,6 +260,7 @@ rule-providers:
   panda_m3u8: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Panda/m3u8.list"}
   panda_ts: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Panda/ts.list"}
   flex_api: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex/api.list"}
+  flex_cdn: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex/cdn.list"}
   flex_live: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Flex/live.list"}
   soop: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/Soop.list"}
   popkon: { <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/thereto/openclash_rules/refs/heads/main/KoreaBJ/PopKon.list"}
