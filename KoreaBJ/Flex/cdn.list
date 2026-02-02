@@ -1,0 +1,10 @@
+# Flex TTing相关域名
+# 域名匹配
+DOMAIN,io.flextv.co.kr
+DOMAIN,static.flextv.co.kr
+DOMAIN,assets.flextv.co.kr
+DOMAIN,www.flextv.co.kr
+# 域名后缀匹配
+DOMAIN-SUFFIX,flextv.co.kr
+# 域名关键字匹配
+DOMAIN-KEYWORD,flextv
