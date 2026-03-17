@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://c88cccd6071bc.jpg"
+    url: "https://b5a2573f1eb913.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,7 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuzdsfd9c186c230fd4258"
+    url: "https://zhuz0fd4258"
 
   快猫:
     <<: *p
@@ -230,6 +230,9 @@ rules:
   - RULE-SET,flex_live,🔞 FlexLive
   - RULE-SET,soop,💠 Soop
   - RULE-SET,popkon,💠 Popkon
+  - DOMAIN-SUFFIX,adobe.com,REJECT
+  - DOMAIN-SUFFIX,adobe.io,REJECT
+  - DOMAIN-SUFFIX,adobelogin.com,REJECT
   - RULE-SET,proxyair,🔰 节点选择
   - RULE-SET,private_domain,🎯 全球直连
   - RULE-SET,github_domain,💻 GitHub
