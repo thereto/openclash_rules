@@ -4,7 +4,7 @@ p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://d
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://b5a2573f1eb913.jpg"
+    url: "https://8dxxxxxxx452fe87.jpg"
 
   飞鸟:
     <<: *p
@@ -12,7 +12,11 @@ proxy-providers:
 
   牛逼:
     <<: *p
-    url: "https://zhuz0fd4258"
+    url: "https://xiaoxxxxxxx258"
+
+  多宝:
+    <<: *p
+    url: "https://dxxxxxxxxxc"
 
   快猫:
     <<: *p
@@ -93,6 +97,7 @@ dns:
     - 119.29.29.29
   # 默认本地 DNS，仅用于国内域名（通过 fallback-filter 控制）
   nameserver:
+    - https://doh.pub/dns-query
     - 223.5.5.5
     - 119.29.29.29
 
@@ -147,17 +152,27 @@ dns:
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [🎯 全球直连, 🇸🇬 快猫·新加坡, 🇰🇷 快猫·韩国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇰🇷 飞鸟·韩国, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国, 🇸🇬 SD·新加坡, 🇭🇰 SD·香港, 🇺🇸 SD·美国, 🇸🇬 牛逼·新加坡, 🇭🇰 牛逼·香港, 🇰🇷 牛逼·韩国]}
+pr: &pr {type: select, proxies: [🎯 全球直连, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇰🇷 快猫·韩国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇰🇷 飞鸟·韩国, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国, 🇸🇬 SD·新加坡, 🇭🇰 SD·香港, 🇰🇷 SD·韩国, 🇺🇸 SD·美国, 🇸🇬 牛逼·新加坡, 🇭🇰 牛逼·香港, 🇰🇷 牛逼·韩国, 🇰🇷 多宝·韩国]}
+kr: &kr {type: select, proxies: [🇰🇷 韩国-链式, 🇰🇷 快猫·韩国, 🇰🇷 飞鸟·韩国, 🇰🇷 SD·韩国, 🇰🇷 牛逼·韩国, 🇰🇷 多宝·韩国]}
 
 proxies:
   - name: "直连"
     type: direct
     udp: true
+  
+  - name: "🇰🇷 韩国-链式" # 落地节点命名
+    type: socks5
+    server: 68.167.188.7 # 住宅IP 代理地址
+    port: 8899
+    username: B4v6N2P1u1d0
+    password: y4C7z3p3T0j3
+    udp: true
+    dialer-proxy: 🇰🇷 多宝·韩国 # 指定前置代理节点组
 
 proxy-groups:
   - {name: 🌍 DNS解析, type: select, proxies: [🎯 全球直连, 🇸🇬 飞鸟·新加坡-02, 🇭🇰 飞鸟·香港-10, 🇭🇰 飞鸟·香港-11, 🇸🇬 SD·新加坡-01, 🇸🇬 SD·新加坡-02, 🇸🇬 SD·新加坡-03, 🇸🇬 SD·新加坡-04, 🇸🇬 SD·新加坡-05, 🇸🇬 SD·新加坡-06, 🇸🇬 SD·新加坡-07, 🇸🇬 SD·新加坡-08, 🇸🇬 SD·新加坡-09, 🇸🇬 SD·新加坡-10, 🇭🇰 SD·香港-01, 🇭🇰 SD·香港-02, 🇭🇰 SD·香港-03, 🇭🇰 SD·香港-04, 🇭🇰 SD·香港-05, 🇭🇰 SD·香港-06, 🇭🇰 SD·香港-07, 🇭🇰 SD·香港-08, 🇭🇰 SD·香港-09, 🇭🇰 SD·香港-10, 🇭🇰 SD·香港-11, 🇭🇰 SD·香港-12, 🇭🇰 SD·香港-13, 🇭🇰 SD·香港-14, 🇭🇰 SD·香港-15]}
   - {name: 🔰 节点选择, <<: *pr}
-  - {name: 💠 PandaAPI, <<: *pr}
+  - {name: 💠 PandaAPI, <<: *kr}
   - {name: 💒 PandaCDN, <<: *pr}
   - {name: 🔞 PandaLive, <<: *pr}
   - {name: 🔞 PandaMu, <<: *pr}
@@ -177,9 +192,11 @@ proxy-groups:
   - {name: 🎯 全球直连, type: select, proxies: [直连]}
   - {name: 🐋 漏网之鱼, <<: *pr}
   - {name: 🇸🇬 快猫·新加坡, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
+  - {name: 🇭🇰 快猫·香港, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(香港|hk|hongkong|hong kong)"}
   - {name: 🇰🇷 快猫·韩国, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
   - {name: 🇸🇬 SD·新加坡, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
   - {name: 🇭🇰 SD·香港, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(港|hk|hongkong|Hong Kong)"}
+  - {name: 🇰🇷 SD·韩国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
   - {name: 🇺🇸 SD·美国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美|us|United States)"}
   - {name: 🇸🇬 飞鸟·新加坡, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
   - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?=.*(香港|hk|hongkong|hong kong))^((?!(ipv6)).)*$"}
@@ -189,6 +206,7 @@ proxy-groups:
   - {name: 🇸🇬 牛逼·新加坡, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(新加坡|坡|狮城|SG|Singapore))(?=.*(流媒体解锁)).*$"}
   - {name: 🇭🇰 牛逼·香港, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(香港|hk|hongkong|hong kong))(?=.*(流媒体解锁)).*$"}
   - {name: 🇰🇷 牛逼·韩国, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
+  - {name: 🇰🇷 多宝·韩国, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
   - {name: 🇸🇬 飞鸟·新加坡-02, type: select, use: [飞鸟], filter: "(?i)(新加坡-02)"}
   - {name: 🇭🇰 飞鸟·香港-10, type: select, use: [飞鸟], filter: "(?i)(香港-10)"}
   - {name: 🇭🇰 飞鸟·香港-11, type: select, use: [飞鸟], filter: "(?i)(香港-11)"}
