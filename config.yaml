@@ -162,10 +162,10 @@ proxies:
   
   - name: "🇰🇷 韩国-链式" # 落地节点命名
     type: socks5
-    server: 68.167.188.7 # 住宅IP 代理地址
-    port: 8899
-    username: B4v6N2P1u1d0
-    password: y4C7z3p3T0j3
+    server:  # 住宅IP 代理地址
+    port: 
+    username: 
+    password: 
     udp: true
     dialer-proxy: 🇰🇷 多宝·韩国 # 指定前置代理节点组
 
