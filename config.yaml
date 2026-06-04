@@ -1,26 +1,26 @@
-p: &p {type: http, interval: 43200, health-check: {enable: true, url: "https://dns.cloudflare.com/generate_204", interval: 21600}}
+p: &p {type: http, interval: 86400, health-check: {enable: true, url: "https://dns.cloudflare.com/generate_204", interval: 21600}}
 
 # 机场订阅
 proxy-providers:
   SSRDOG:
     <<: *p
-    url: "https://8dxxxxxxx452fe87.jpg"
-
-  飞鸟:
+    url: "https://xxxxx"
+    
+  TAG:
     <<: *p
-    url: "http://192.168.0.110/flybird/sub"
+    url: "https://xxxxxxxxxxxxxxxxx"
 
   牛逼:
     <<: *p
-    url: "https://xiaoxxxxxxx258"
+    url: "https://xxxxxxxxxxxxxxxxxxxxxx"
 
   多宝:
     <<: *p
-    url: "https://dxxxxxxxxxc"
+    url: "http://xxxxxxxxxxxxxxxxxxxxx"
 
   快猫:
     <<: *p
-    url: "http://192.168.0.110/kuaimao/sub"
+    url: "http://xxxxxxxxxxxxxxxxxxxxx"
 
 # 全局配置
 port: 7890
@@ -36,7 +36,6 @@ ipv6: false
 unified-delay: true
 tcp-concurrent: true
 interface-name: br-lan
-global-client-fingerprint: chrome
 keep-alive-idle: 600
 keep-alive-interval: 15
 profile:
@@ -135,6 +134,7 @@ dns:
     - "*.localhost"
 
     # 直播 CDN / HLS / TS 强制 real-ip
+    - "+.pandalive.co.k"
     - "+.j.cloudfront.hls.live-video.net"
     - "+.live-video.net"
     - "+.cloudfront.net"
@@ -152,25 +152,16 @@ dns:
 
 # 出站策略
 # 注意锚点必须放在引用的上方，可以集中把锚点全部放yaml的顶部。
-pr: &pr {type: select, proxies: [🎯 全球直连, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇰🇷 快猫·韩国, 🇸🇬 飞鸟·新加坡, 🇭🇰 飞鸟·香港, 🇰🇷 飞鸟·韩国, 🇯🇵 飞鸟·日本, 🇺🇸 飞鸟·美国, 🇸🇬 SD·新加坡, 🇭🇰 SD·香港, 🇰🇷 SD·韩国, 🇺🇸 SD·美国, 🇸🇬 牛逼·新加坡, 🇭🇰 牛逼·香港, 🇰🇷 牛逼·韩国, 🇰🇷 多宝·韩国]}
-kr: &kr {type: select, proxies: [🇰🇷 韩国-链式, 🇰🇷 快猫·韩国, 🇰🇷 飞鸟·韩国, 🇰🇷 SD·韩国, 🇰🇷 牛逼·韩国, 🇰🇷 多宝·韩国]}
+pr: &pr {type: select, proxies: [🎯 直连, 🇸🇬 快猫·新加坡, 🇭🇰 快猫·香港, 🇰🇷 快猫·韩国, 🇸🇬 牛逼·新加坡, 🇭🇰 牛逼·香港, 🇰🇷 牛逼·韩国, 🇺🇸 牛逼·美国,  🇸🇬 多宝·新加坡, 🇭🇰 多宝·香港, 🇰🇷 多宝·韩国, 🇺🇸 多宝·美国, 🇸🇬 SD·新加坡, 🇭🇰 SD·香港, 🇰🇷 SD·韩国, 🇺🇸 SD·美国, 🇸🇬 TAG·新加坡, 🇭🇰 TAG·香港, 🇰🇷 TAG·韩国, 🇺🇸 TAG·美国]}
+kr: &kr {type: select, proxies: [🎯 直连, 🇰🇷 TAG·韩国, 🇰🇷 快猫·韩国, 🇰🇷 牛逼·韩国]}
 
 proxies:
-  - name: "直连"
+  - name: "🎯 直连"
     type: direct
     udp: true
-  
-  - name: "🇰🇷 韩国-链式" # 落地节点命名
-    type: socks5
-    server:  # 住宅IP 代理地址
-    port: 
-    username: 
-    password: 
-    udp: true
-    dialer-proxy: 🇰🇷 多宝·韩国 # 指定前置代理节点组
 
 proxy-groups:
-  - {name: 🌍 DNS解析, type: select, proxies: [🎯 全球直连, 🇸🇬 飞鸟·新加坡-02, 🇭🇰 飞鸟·香港-10, 🇭🇰 飞鸟·香港-11, 🇸🇬 SD·新加坡-01, 🇸🇬 SD·新加坡-02, 🇸🇬 SD·新加坡-03, 🇸🇬 SD·新加坡-04, 🇸🇬 SD·新加坡-05, 🇸🇬 SD·新加坡-06, 🇸🇬 SD·新加坡-07, 🇸🇬 SD·新加坡-08, 🇸🇬 SD·新加坡-09, 🇸🇬 SD·新加坡-10, 🇭🇰 SD·香港-01, 🇭🇰 SD·香港-02, 🇭🇰 SD·香港-03, 🇭🇰 SD·香港-04, 🇭🇰 SD·香港-05, 🇭🇰 SD·香港-06, 🇭🇰 SD·香港-07, 🇭🇰 SD·香港-08, 🇭🇰 SD·香港-09, 🇭🇰 SD·香港-10, 🇭🇰 SD·香港-11, 🇭🇰 SD·香港-12, 🇭🇰 SD·香港-13, 🇭🇰 SD·香港-14, 🇭🇰 SD·香港-15]}
+  - {name: 🌍 DNS解析, type: select, proxies: [🎯 直连, SSRDOG, TAG]}
   - {name: 🔰 节点选择, <<: *pr}
   - {name: 💠 PandaAPI, <<: *kr}
   - {name: 💒 PandaCDN, <<: *pr}
@@ -182,59 +173,41 @@ proxy-groups:
   - {name: 🔞 FlexLive, <<: *pr}
   - {name: 💠 Soop, <<: *pr}
   - {name: 💠 Popkon, <<: *pr}
+  - {name: 🧿 AI服务, <<: *pr}
   - {name: 📹 YouTube, <<: *pr}
   - {name: 🌎 Google, <<: *pr}
   - {name: 💻 GitHub, <<: *pr}
-  - {name: 🧿 AI服务, <<: *pr}
   - {name: 🎶 TikTok, <<: *pr}
   - {name: 📲 Telegram, <<: *pr}
-  - {name: ✈ 测速工具, <<: *pr}
-  - {name: 🎯 全球直连, type: select, proxies: [直连]}
   - {name: 🐋 漏网之鱼, <<: *pr}
-  - {name: 🇸🇬 快猫·新加坡, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
-  - {name: 🇭🇰 快猫·香港, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(香港|hk|hongkong|hong kong)"}
-  - {name: 🇰🇷 快猫·韩国, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇸🇬 SD·新加坡, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
-  - {name: 🇭🇰 SD·香港, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(港|hk|hongkong|Hong Kong)"}
-  - {name: 🇰🇷 SD·韩国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇺🇸 SD·美国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美|us|United States)"}
-  - {name: 🇸🇬 飞鸟·新加坡, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|坡|狮城|SG|Singapore)"}
-  - {name: 🇭🇰 飞鸟·香港, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?=.*(香港|hk|hongkong|hong kong))^((?!(ipv6)).)*$"}
-  - {name: 🇰🇷 飞鸟·韩国, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇯🇵 飞鸟·日本, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?=.*(日本|JP|(?i)Japan))^((?!(ipv6)).)*$"}
-  - {name: 🇺🇸 飞鸟·美国, type: url-test, use: [飞鸟], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美|us|unitedstates|united states)"}
-  - {name: 🇸🇬 牛逼·新加坡, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(新加坡|坡|狮城|SG|Singapore))(?=.*(流媒体解锁)).*$"}
-  - {name: 🇭🇰 牛逼·香港, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(香港|hk|hongkong|hong kong))(?=.*(流媒体解锁)).*$"}
-  - {name: 🇰🇷 牛逼·韩国, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇰🇷 多宝·韩国, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(KR|Korea|KOR|首尔|韩|韓)"}
-  - {name: 🇸🇬 飞鸟·新加坡-02, type: select, use: [飞鸟], filter: "(?i)(新加坡-02)"}
-  - {name: 🇭🇰 飞鸟·香港-10, type: select, use: [飞鸟], filter: "(?i)(香港-10)"}
-  - {name: 🇭🇰 飞鸟·香港-11, type: select, use: [飞鸟], filter: "(?i)(香港-11)"}
-  - {name: 🇸🇬 SD·新加坡-01, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨01)"}
-  - {name: 🇸🇬 SD·新加坡-02, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨02)"}
-  - {name: 🇸🇬 SD·新加坡-03, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨03)"}
-  - {name: 🇸🇬 SD·新加坡-04, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨04)"}
-  - {name: 🇸🇬 SD·新加坡-05, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨05)"}
-  - {name: 🇸🇬 SD·新加坡-06, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨06)"}
-  - {name: 🇸🇬 SD·新加坡-07, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨07)"}
-  - {name: 🇸🇬 SD·新加坡-08, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨08)"}
-  - {name: 🇸🇬 SD·新加坡-09, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨09)"}
-  - {name: 🇸🇬 SD·新加坡-10, type: select, use: [SSRDOG], filter: "(?i)(Singapore丨10)"}
-  - {name: 🇭🇰 SD·香港-01, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨01)"}
-  - {name: 🇭🇰 SD·香港-02, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨02)"}
-  - {name: 🇭🇰 SD·香港-03, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨03)"}
-  - {name: 🇭🇰 SD·香港-04, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨04)"}
-  - {name: 🇭🇰 SD·香港-05, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨05)"}
-  - {name: 🇭🇰 SD·香港-06, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨06)"}
-  - {name: 🇭🇰 SD·香港-07, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨07)"}
-  - {name: 🇭🇰 SD·香港-08, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨08)"}
-  - {name: 🇭🇰 SD·香港-09, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨09)"}
-  - {name: 🇭🇰 SD·香港-10, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨10)"}
-  - {name: 🇭🇰 SD·香港-11, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨11)"}
-  - {name: 🇭🇰 SD·香港-12, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨12)"}
-  - {name: 🇭🇰 SD·香港-13, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨13)"}
-  - {name: 🇭🇰 SD·香港-14, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨14)"}
-  - {name: 🇭🇰 SD·香港-15, type: select, use: [SSRDOG], filter: "(?i)(Hong Kong丨15)"}
+  
+  - {name: SSRDOG, type: select, use: [SSRDOG], interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore|香港|hongkong|hong kong|韩国|Korea|台湾)"}
+  - {name: TAG, type: select, use: [TAG], interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore|香港|hongkong|hong kong|韩国|Korea|台湾)"}
+
+  - {name: 🇸🇬 SD·新加坡, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore)"}
+  - {name: 🇭🇰 SD·香港, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(港|hongkong|Hong Kong)"}
+  - {name: 🇰🇷 SD·韩国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(韩国|Korea)"}
+  - {name: 🇺🇸 SD·美国, type: url-test, use: [SSRDOG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美国|United States)"}
+  
+  - {name: 🇸🇬 TAG·新加坡, type: select, use: [TAG], interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore)"}
+  - {name: 🇭🇰 TAG·香港, type: select, use: [TAG], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(港|hongkong|Hong Kong)"}
+  - {name: 🇰🇷 TAG·韩国, type: select, use: [TAG], interval: 300, lazy: true, filter: "(?i)(韩国|Korea)"}
+  - {name: 🇺🇸 TAG·美国, type: select, use: [TAG], interval: 300, lazy: true, filter: "(?i)(美国|United States)"}
+  
+  - {name: 🇸🇬 快猫·新加坡, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore)"}
+  - {name: 🇭🇰 快猫·香港, type: url-test, use: [快猫], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(香港|hongkong|hong kong)"}
+  - {name: 🇰🇷 快猫·韩国, type: select, use: [快猫], interval: 300, lazy: true, filter: "(?i)(韩国|Korea)"}
+
+  - {name: 🇸🇬 牛逼·新加坡, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(新加坡|Singapore))(?=.*(流媒体解锁)).*$"}
+  - {name: 🇭🇰 牛逼·香港, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "^(?=.*(香港|hongkong|hong kong))(?=.*(流媒体解锁)).*$"}
+  - {name: 🇰🇷 牛逼·韩国, type: select, use: [牛逼], interval: 300, lazy: true, filter: "(?i)(韩国|Korea)"}
+  - {name: 🇺🇸 牛逼·美国, type: url-test, use: [牛逼], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美国|unitedstates|united states)"}
+
+  - {name: 🇸🇬 多宝·新加坡, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(新加坡|Singapore)"}
+  - {name: 🇭🇰 多宝·香港, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(香港|hongkong|hong kong)"}
+  - {name: 🇰🇷 多宝·韩国, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(韩国|Korea)"}
+  - {name: 🇺🇸 多宝·美国, type: url-test, use: [多宝], tolerance: 20, interval: 300, lazy: true, filter: "(?i)(美国|unitedstates|united states)"}
+
 
 rules:
   - RULE-SET,proxylite,🌍 DNS解析
@@ -252,19 +225,18 @@ rules:
   - DOMAIN-SUFFIX,adobe.io,REJECT
   - DOMAIN-SUFFIX,adobelogin.com,REJECT
   - RULE-SET,proxyair,🔰 节点选择
-  - RULE-SET,private_domain,🎯 全球直连
+  - RULE-SET,private_domain,🎯 直连
+  - RULE-SET,ai,🧿 AI服务
   - RULE-SET,github_domain,💻 GitHub
   - RULE-SET,tiktok_domain,🎶 TikTok
-  - RULE-SET,speedtest_domain,✈ 测速工具
-  - RULE-SET,ai,🧿 AI服务
   - RULE-SET,youtube_domain,📹 YouTube
   - RULE-SET,google_domain,🌎 Google
   - RULE-SET,telegram_domain,📲 Telegram
   - RULE-SET,telegram_ip,📲 Telegram,no-resolve
   - RULE-SET,google_ip,🌎 Google,no-resolve
   - RULE-SET,gfw_domain,🔰 节点选择
-  - RULE-SET,cn_ip,🎯 全球直连,no-resolve
-  - RULE-SET,cn_domain,🎯 全球直连
+  - RULE-SET,cn_ip,🎯 直连,no-resolve
+  - RULE-SET,cn_domain,🎯 直连
   - RULE-SET,geolocation-!cn,🔰 节点选择
   - MATCH,🐋 漏网之鱼
 
@@ -292,7 +264,6 @@ rule-providers:
   google_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   github_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
   telegram_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
-  speedtest_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   tiktok_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
   gfw_domain: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
   geolocation-!cn: { <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.mrs"}
