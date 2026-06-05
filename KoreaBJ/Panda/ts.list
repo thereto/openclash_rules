@@ -1,6 +1,5 @@
 # 拉取ts片段
 # 域名后缀匹配
-DOMAIN-SUFFIX,a.fastly.hls.live-video.net
 DOMAIN-SUFFIX,j.cloudfront.hls.live-video.net
 DOMAIN-SUFFIX,hls.live-video.net
 DOMAIN-SUFFIX,cloudfront.net
@@ -8,4 +7,3 @@ DOMAIN-SUFFIX,amazonaws.com
 DOMAIN-SUFFIX,awsstatic.com
 # 域名关键字匹配
 DOMAIN-KEYWORD,cloudfront
-DOMAIN-KEYWORD,fastly
